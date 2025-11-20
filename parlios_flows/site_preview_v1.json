@@ -1,0 +1,370 @@
+﻿{
+  "id": "site_preview_v1",
+  "name": "Interactive Site Preview Flow v1",
+  "domain": "studio",
+  "section": "studio",
+  "description": "Flow guidé en 6 étapes pour générer une preview de Hero de site à partir de choix simples (sans prompt texte).",
+  "version": "1.0.0",
+  "ui_theme": "studio",
+  "steps": [
+    {
+      "id": "welcome_intent",
+      "order": 1,
+      "title": "Bienvenue",
+      "subtitle": "On va te montrer à quoi pourrait ressembler ton futur site.",
+      "goal": "Capturer l’intention principale du site (objectif business)",
+      "component_type": "wizard_step",
+      "inputs": [
+        {
+          "id": "site_goal",
+          "type": "select_cards",
+          "label": "Ton objectif principal avec ce site",
+          "description": "Choisis ce que tu veux que ton site fasse en priorité.",
+          "required": true,
+          "options": [
+            {
+              "value": "présenter_un_service",
+              "label": "Présenter mon activité",
+              "helper_text": "Expliquer clairement ce que tu fais et à qui tu t’adresses."
+            },
+            {
+              "value": "générer_des_leads",
+              "label": "Trouver des clients",
+              "helper_text": "Mettre en avant ton offre et récupérer des demandes de contact."
+            },
+            {
+              "value": "vendre_en_ligne",
+              "label": "Vendre en ligne",
+              "helper_text": "Mettre en avant un produit ou une boutique e-commerce."
+            },
+            {
+              "value": "présence_en_ligne_simple",
+              "label": "Simple présence en ligne",
+              "helper_text": "Avoir une carte de visite propre et rassurante."
+            }
+          ],
+          "maps_to_variable": "site_goal"
+        }
+      ],
+      "output_preview": null
+    },
+    {
+      "id": "brand_identity",
+      "order": 2,
+      "title": "Ton identité",
+      "subtitle": "On pose les bases de ton projet.",
+      "goal": "Récupérer le nom, le logo et une phrase d’activité.",
+      "component_type": "wizard_step",
+      "inputs": [
+        {
+          "id": "logo_upload",
+          "type": "file_upload",
+          "label": "Ton logo (optionnel, mais conseillé)",
+          "description": "PNG ou SVG de ton logo.",
+          "required": false,
+          "accept": ["image/png", "image/svg+xml"],
+          "maps_to_variable": "logo_uploaded"
+        },
+        {
+          "id": "brand_name",
+          "type": "text",
+          "label": "Nom de ton activité",
+          "placeholder": "Ex : Parlios, Boulangerie du Port...",
+          "required": true,
+          "max_length": 80,
+          "maps_to_variable": "brand_name"
+        },
+        {
+          "id": "business_description",
+          "type": "textarea",
+          "label": "En une phrase, tu fais quoi ?",
+          "placeholder": "Ex : J’aide les entrepreneurs à gagner du temps grâce à l’IA.",
+          "required": true,
+          "max_length": 180,
+          "maps_to_variable": "business_description"
+        },
+        {
+          "id": "primary_offer",
+          "type": "text",
+          "label": "Ton offre principale",
+          "placeholder": "Ex : Outils IA simples pour entrepreneurs.",
+          "required": true,
+          "max_length": 140,
+          "maps_to_variable": "primary_offer"
+        }
+      ],
+      "output_preview": null
+    },
+    {
+      "id": "audience_context",
+      "order": 3,
+      "title": "Pour qui tu parles",
+      "subtitle": "On cible les bonnes personnes.",
+      "goal": "Comprendre l’audience et le secteur.",
+      "component_type": "wizard_step",
+      "inputs": [
+        {
+          "id": "audience_segment",
+          "type": "select_cards_multi",
+          "label": "À qui s’adresse ton site ?",
+          "description": "Tu peux choisir plusieurs profils.",
+          "required": true,
+          "options": [
+            { "value": "nouveaux_entrepreneurs", "label": "Nouveaux entrepreneurs" },
+            { "value": "entrepreneurs_établis", "label": "Entrepreneurs déjà lancés" },
+            { "value": "commerçants_boutiques", "label": "Commerçants / boutiques" },
+            { "value": "coachs_freelances", "label": "Coachs / freelances" },
+            { "value": "autre", "label": "Autre" }
+          ],
+          "maps_to_variable": null
+        },
+        {
+          "id": "target_audience",
+          "type": "textarea",
+          "label": "Décris tes client·e·s idéal·e·s en quelques mots",
+          "placeholder": "Ex : Entrepreneurs francophones qui veulent gagner du temps sans devenir geeks.",
+          "required": true,
+          "max_length": 220,
+          "maps_to_variable": "target_audience"
+        },
+        {
+          "id": "industry",
+          "type": "select",
+          "label": "Ton secteur principal",
+          "required": true,
+          "options": [
+            { "value": "commerce", "label": "Commerce / boutique" },
+            { "value": "restauration", "label": "Restauration / food" },
+            { "value": "coaching", "label": "Coaching / accompagnement" },
+            { "value": "créateur_contenu", "label": "Créateur de contenu" },
+            { "value": "saas", "label": "SaaS / logiciel" },
+            { "value": "autre", "label": "Autre" }
+          ],
+          "maps_to_variable": "industry"
+        }
+      ],
+      "output_preview": null
+    },
+    {
+      "id": "visual_style",
+      "order": 4,
+      "title": "Ambiance & style visuel",
+      "subtitle": "On va aligner l’ambiance avec ton univers.",
+      "goal": "Traduire les goûts du user en variables vibe + hero_style.",
+      "component_type": "wizard_step",
+      "inputs": [
+        {
+          "id": "vibe",
+          "type": "select_cards",
+          "label": "L’ambiance que tu veux donner",
+          "description": "Choisis ce que les gens doivent ressentir.",
+          "required": true,
+          "options": [
+            {
+              "value": "confiance",
+              "label": "Sérieux & professionnel",
+              "helper_text": "Tu veux que ce soit rassurant, crédible, carré."
+            },
+            {
+              "value": "créatif",
+              "label": "Créatif & coloré",
+              "helper_text": "Tu veux montrer ton côté artistique, fun, original."
+            },
+            {
+              "value": "premium",
+              "label": "Premium & minimaliste",
+              "helper_text": "Tu préfères un style épuré, haut de gamme."
+            },
+            {
+              "value": "dynamique",
+              "label": "Énergique & punchy",
+              "helper_text": "Tu veux que ça respire le mouvement et la motivation."
+            }
+          ],
+          "maps_to_variable": "vibe"
+        },
+        {
+          "id": "hero_style",
+          "type": "select_cards",
+          "label": "Style de section principale (Hero)",
+          "description": "Ce qu’on met en avant visuellement en haut de ton site.",
+          "required": true,
+          "options": [
+            {
+              "value": "image_pleine_largeur",
+              "label": "Image plein écran",
+              "helper_text": "Une grande image immersive en fond."
+            },
+            {
+              "value": "illustration_minimale",
+              "label": "Texte + illustration simple",
+              "helper_text": "Une compo claire avec une illustration à côté."
+            },
+            {
+              "value": "fond_dégradé",
+              "label": "Fond dégradé moderne",
+              "helper_text": "Un dégradé futuriste avec texte bien lisible."
+            },
+            {
+              "value": "mockup_app",
+              "label": "Mockup d’app / logiciel",
+              "helper_text": "Parfait si tu vends un produit digital."
+            }
+          ],
+          "maps_to_variable": "hero_style"
+        }
+      ],
+      "output_preview": null
+    },
+    {
+      "id": "summary_confirm",
+      "order": 5,
+      "title": "On récapitule",
+      "subtitle": "Vérifie que tout est bon avant de générer l’aperçu.",
+      "goal": "Donner un sentiment de contrôle avant la génération.",
+      "component_type": "summary_step",
+      "summary_fields": [
+        "brand_name",
+        "business_description",
+        "target_audience",
+        "site_goal",
+        "vibe"
+      ],
+      "primary_cta": {
+        "label": "Générer l’aperçu de mon site",
+        "action": "generate_preview"
+      },
+      "secondary_cta": {
+        "label": "Modifier quelque chose",
+        "action": "go_back"
+      }
+    },
+    {
+      "id": "preview_screen",
+      "order": 6,
+      "title": "Aperçu de ton site",
+      "subtitle": "Ce n’est qu’un aperçu, mais c’est déjà concret.",
+      "goal": "Afficher la Hero générée + palette + key meta.",
+      "component_type": "preview_step",
+      "expects_backend_payload": true,
+      "payload_shape": {
+        "hero": {
+          "title": "string",
+          "subtitle": "string",
+          "cta_main": "string",
+          "cta_secondary": "string",
+          "visual_style": "string"
+        },
+        "palette": {
+          "primary_color": "string",
+          "secondary_color": "string",
+          "accent_color": "string",
+          "background_color": "string",
+          "text_color": "string"
+        },
+        "meta": {
+          "brand_name": "string",
+          "target_audience": "string",
+          "site_goal": "string",
+          "vibe": "string"
+        }
+      },
+      "actions": [
+        {
+          "id": "copy_content",
+          "label": "Copier le texte de la Hero",
+          "type": "copy_to_clipboard"
+        },
+        {
+          "id": "save_to_parlios",
+          "label": "Garder ce site dans mon espace Parlios (bientôt)",
+          "type": "coming_soon"
+        },
+        {
+          "id": "retry_flow",
+          "label": "Recommencer avec d’autres options",
+          "type": "restart_flow"
+        }
+      ]
+    }
+  ],
+  "backend_integration": {
+    "endpoint": "/api/site-preview",
+    "method": "POST",
+    "request_body_shape": {
+      "tool": "site_preview_creator_v1",
+      "domain": "studio",
+      "inputs": {
+        "brand_name": "string",
+        "business_description": "string",
+        "primary_offer": "string",
+        "target_audience": "string",
+        "industry": "string",
+        "site_goal": "string",
+        "vibe": "string",
+        "hero_style": "string",
+        "logo_description": "string (optionnel)"
+      }
+    },
+    "ia_pipeline": [
+      {
+        "prompt_id": "HERO_SECTION_BUILDER",
+        "description": "Génère le bloc Hero (titre, sous-titre, CTAs, style).",
+        "inputs_from": [
+          "brand_name",
+          "primary_offer",
+          "target_audience",
+          "site_goal",
+          "vibe",
+          "industry",
+          "hero_style"
+        ],
+        "outputs": [
+          "hero_title",
+          "hero_subtitle",
+          "cta_main",
+          "cta_secondary",
+          "visual_style"
+        ]
+      },
+      {
+        "prompt_id": "PALETTE_GENERATOR",
+        "description": "Propose une palette visuelle alignée avec le logo et la vibe.",
+        "inputs_from": [
+          "logo_description",
+          "vibe",
+          "industry"
+        ],
+        "outputs": [
+          "primary_color",
+          "secondary_color",
+          "accent_color",
+          "background_color",
+          "text_color"
+        ]
+      }
+    ],
+    "response_mapping": {
+      "hero": {
+        "title": "hero_title",
+        "subtitle": "hero_subtitle",
+        "cta_main": "cta_main",
+        "cta_secondary": "cta_secondary",
+        "visual_style": "visual_style"
+      },
+      "palette": {
+        "primary_color": "primary_color",
+        "secondary_color": "secondary_color",
+        "accent_color": "accent_color",
+        "background_color": "background_color",
+        "text_color": "text_color"
+      },
+      "meta": {
+        "brand_name": "brand_name",
+        "target_audience": "target_audience",
+        "site_goal": "site_goal",
+        "vibe": "vibe"
+      }
+    }
+  }
+}
