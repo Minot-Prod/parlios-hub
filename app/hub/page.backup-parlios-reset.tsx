@@ -7,64 +7,21 @@ type MissionCategory = "create" | "media" | "code" | "content" | "other";
 type Mission = {
   id: string;
   label: string;
-  helper: string;
   category: MissionCategory;
 };
 
 const MISSIONS: Mission[] = [
-  {
-    id: "create-website",
-    category: "create",
-    label: "Créer un site web",
-    helper: "Landing page, site vitrine, page de vente simple…"
-  },
-  {
-    id: "create-app",
-    category: "create",
-    label: "Créer une application",
-    helper: "Outil interne, mini SaaS, dashboard, app métier."
-  },
-  {
-    id: "create-offer",
-    category: "create",
-    label: "Créer une offre / boutique",
-    helper: "Page d’offre, bundle, tunnel simple pour vendre."
-  },
-  {
-    id: "create-image",
-    category: "media",
-    label: "Générer une image",
-    helper: "Prompts image (Midjourney, DALL·E, etc.)."
-  },
-  {
-    id: "create-video",
-    category: "media",
-    label: "Générer une vidéo",
-    helper: "Script, storyboard, idées pour vidéo IA."
-  },
-  {
-    id: "create-presentation",
-    category: "content",
-    label: "Créer une présentation",
-    helper: "Slides, webinaire, conférence, atelier."
-  },
-  {
-    id: "code",
-    category: "code",
-    label: "Écrire / améliorer du code",
-    helper: "Features, refacto, debug, intégrations API."
-  },
-  {
-    id: "brainstorm",
-    category: "other",
-    label: "Brainstorm / coaching Parlios",
-    helper: "Clarifier une idée, un projet, une stratégie."
-  }
+  { id: "create-website", category: "create", label: "Créer un site web" },
+  { id: "create-app", category: "create", label: "Créer une application" },
+  { id: "create-image", category: "media", label: "Générer une image" },
+  { id: "create-video", category: "media", label: "Générer une vidéo" },
+  { id: "create-presentation", category: "content", label: "Créer une présentation" },
+  { id: "code", category: "code", label: "Écrire / améliorer du code" },
+  { id: "brainstorm", category: "other", label: "Brainstorm / coaching Parlios" }
 ];
 
 export default function HubPage() {
   const [selectedId, setSelectedId] = React.useState<string | null>(null);
-
   const selectedMission = React.useMemo(
     () => MISSIONS.find((m) => m.id === selectedId) ?? null,
     [selectedId]
@@ -77,7 +34,6 @@ export default function HubPage() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
-        {/* Header */}
         <header className="text-center space-y-2">
           <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-500">
             Parlios · Hub IA
@@ -86,14 +42,13 @@ export default function HubPage() {
             Parle au cœur de Parlios.
           </h1>
           <p className="text-sm sm:text-base text-zinc-600 max-w-2xl mx-auto">
-            Fenêtre centrale du système&nbsp;: tu expliques ce que tu veux créer, optimiser
-            ou comprendre. Parlios réfléchit avec toi, puis te propose le meilleur chemin.
+            Fenêtre centrale du système : explique ce que tu veux créer ou optimiser.
+            Parlios t&apos;accompagne et te propose le meilleur plan.
           </p>
         </header>
 
-        {/* Chat central */}
         <section className="max-w-3xl mx-auto">
-          <div className="rounded-3xl border border-zinc-200 bg-white shadow-lg shadow-zinc-200/70 overflow-hidden">
+          <div className="rounded-3xl border border-zinc-200 bg-white shadow-lg shadow-zinc-200/80 overflow-hidden">
             <div className="px-5 py-3 border-b border-zinc-200 flex items-center justify-between gap-3">
               <div>
                 <p className="text-[11px] font-medium tracking-[0.18em] uppercase text-zinc-500">
@@ -113,11 +68,8 @@ export default function HubPage() {
                   </p>
                   <p className="font-medium">{selectedMission.label}</p>
                   <p className="text-[11px] text-zinc-700">
-                    {selectedMission.helper}
-                  </p>
-                  <p className="text-[11px] text-zinc-600">
                     Décris ton besoin dans le champ ci-dessous, Parlios adaptera ses questions
-                    et son plan à ce mode.
+                    et son plan en partant de ce mode.
                   </p>
                 </div>
               )}
@@ -134,7 +86,7 @@ export default function HubPage() {
                 />
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-[11px] text-zinc-500">
-                    Plus tard, ce chat sera relié à ton orchestrateur d&apos;agents Parlios.
+                    Plus tard, cette zone sera branchée à ton orchestrateur d&apos;agents Parlios.
                   </p>
                   <button
                     type="submit"
@@ -148,18 +100,14 @@ export default function HubPage() {
           </div>
         </section>
 
-        {/* Raccourcis */}
         <section className="space-y-3">
           <div className="text-center space-y-1">
             <p className="text-[11px] font-semibold tracking-[0.25em] uppercase text-zinc-500">
-              Choisis une option
-            </p>
-            <p className="text-xs text-zinc-500">
-              Création, média, code, business, optimisation… Choisis une carte, Parlios adaptera les questions et le plan.
+              Raccourcis
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="flex flex-wrap gap-2 justify-center">
             {MISSIONS.map((mission) => {
               const isActive = mission.id === selectedId;
               return (
@@ -172,23 +120,20 @@ export default function HubPage() {
                     )
                   }
                   className={[
-                    "text-left rounded-2xl border px-4 py-3 text-xs sm:text-sm transition",
+                    "inline-flex items-center rounded-full border px-3.5 py-1.5 text-xs sm:text-sm transition",
                     isActive
-                      ? "border-amber-500 bg-amber-50 shadow-sm"
-                      : "border-zinc-200 bg-white hover:border-amber-400 hover:bg-amber-50/40"
+                      ? "border-amber-500 bg-amber-100 text-amber-900"
+                      : "border-zinc-300 bg-white text-zinc-800 hover:border-amber-400 hover:bg-amber-50"
                   ].join(" ")}
                 >
-                  <p className="font-medium text-zinc-900">{mission.label}</p>
-                  <p className="mt-1 text-[11px] text-zinc-600">
-                    {mission.helper}
-                  </p>
+                  {mission.label}
                 </button>
               );
             })}
           </div>
 
           <p className="text-[11px] text-center text-zinc-500">
-            Tu peux aussi ignorer les cartes et simplement écrire ton idée dans le chat, comme sur Kimi ou Skywork.
+            Tu peux aussi simplement écrire ton idée dans le champ de chat, comme sur Kimi ou Skywork.
           </p>
         </section>
 

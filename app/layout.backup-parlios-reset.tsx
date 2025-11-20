@@ -6,27 +6,22 @@ import ThemeSwitch from "../components/ThemeSwitch";
 export const metadata: Metadata = {
   title: "Parlios — Hub IA & Mouvement",
   description:
-    "Parlios aide les entrepreneurs à reprendre le contrôle de leur temps et de leur business grâce à une IA simple, humaine et utile."
+    "Parlios aide les entrepreneurs à optimiser leur temps et leur business avec une IA simple, humaine et utile."
 };
 
-const navLinks = [
-  { href: "/hub", label: "Hub" },
-  { href: "/projet-parlios", label: "Projet" },
-  { href: "/outils", label: "Boîte à outils" },
-  { href: "/application", label: "Application" },
-  { href: "/communaute", label: "Communauté" },
-  { href: "/actualites", label: "Actualités" },
-  { href: "/temoignages-impact", label: "Impact" },
-  { href: "/contact", label: "Contact" }
-];
-
-function NavLink({ href, label }: { href: string; label: string }) {
+function NavLink({
+  href,
+  children
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
     <Link
       href={href}
       className="text-sm text-zinc-700 hover:text-zinc-900 hover:font-medium transition-colors"
     >
-      {label}
+      {children}
     </Link>
   );
 }
@@ -53,9 +48,14 @@ export default function RootLayout({
             </Link>
 
             <nav className="flex items-center gap-4 text-sm ml-6">
-              {navLinks.map((link) => (
-                <NavLink key={link.href} href={link.href} label={link.label} />
-              ))}
+              <NavLink href="/hub">Hub</NavLink>
+              <NavLink href="/projet-parlios">Projet</NavLink>
+              <NavLink href="/outils">Boîte à outils</NavLink>
+              <NavLink href="/application">Application</NavLink>
+              <NavLink href="/communaute">Communauté</NavLink>
+              <NavLink href="/actualites">Actualités</NavLink>
+              <NavLink href="/temoignages-impact">Impact</NavLink>
+              <NavLink href="/contact">Contact</NavLink>
             </nav>
 
             <div className="ml-auto">
