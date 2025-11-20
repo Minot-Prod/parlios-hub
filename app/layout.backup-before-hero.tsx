@@ -37,8 +37,8 @@ export default function RootLayout({
       <body className="min-h-screen bg-zinc-50 text-zinc-900 antialiased">
         <div className="border-b border-zinc-200 bg-white/90 backdrop-blur">
           <header className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center gap-6">
-            {/* Logo Parlios -> home (/) */}
-            <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+            {/* Logo Parlios -> Hub */}
+            <Link href="/hub" className="flex items-center gap-2 flex-shrink-0">
               <img
                 src="/parlios-logo.png"
                 alt="Parlios"
@@ -51,8 +51,7 @@ export default function RootLayout({
 
             {/* Nav centrée */}
             <nav className="flex-1 flex items-center justify-center gap-4 text-sm">
-              <NavLink href="/">Parlios</NavLink>
-              <NavLink href="/hub">Hub IA</NavLink>
+              <NavLink href="/hub">Parlios</NavLink>
               <NavLink href="/projet-parlios">Projet</NavLink>
               <NavLink href="/outils">Boîte à outils</NavLink>
               <NavLink href="/communaute">Communauté</NavLink>
